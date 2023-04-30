@@ -25,8 +25,6 @@ const Info = styled.div`
   justify-content: center;
   transition: all 0.5s ease;
   border-radius: 15px;
-
-
 `;
 
 const Container = styled.div`
@@ -40,11 +38,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #EAE3D2;
+  background-color: #eae3d2;
   position: relative;
   border-radius: 10px;
   box-shadow: 10px 10px 10px #ddd;
-  transition: all 0.4s ease-in-out; 
+  transition: all 0.4s ease-in-out;
 
   /* background-image: radial-gradient(#E7DEC8 100px, #f6f8fa); */
   /* background-image: linear-gradient(to bottom right, #1e285e, #f6f8fa); */
@@ -57,7 +55,7 @@ const Container = styled.div`
     filter: brightness(1.2);
   } */
 
-  &:hover  {
+  &:hover {
     transform: scale(1.03);
     filter: brightness(1.2);
   }

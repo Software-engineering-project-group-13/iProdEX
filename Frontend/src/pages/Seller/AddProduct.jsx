@@ -21,7 +21,7 @@ const Filler = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   display: flex;
   /* background-color: green; */
@@ -104,6 +104,7 @@ const Title = styled.h1`
   font-size: 30px;
   font-weight: 750;
   /* margin: auto; */
+  padding-left: 18%;
   margin-bottom: 25px;
   /* background-color: blueviolet; */
 `;
@@ -143,7 +144,7 @@ const DropdownWrapper = styled.div`
 const AddProducts = () => {
   const [age, setAge] = React.useState("");
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event) => {
     setAge(event.target.value);
   };
 
@@ -158,17 +159,17 @@ const AddProducts = () => {
             <Inputid>
               <Idname>CATEGORY</Idname>
               <DropdownWrapper>
-                <FormControl fullWidth>
+                <FormControl fullWidth size="small">
                   <Select
-                    labelId="demo-simple-select-label"
+                    labelId="demo-select-small-label"
                     id="demo-simple-select"
                     initialValue="age"
                     value={age}
                     onChange={handleChange}
                   >
-                    <MenuItem value={10}>Electronics</MenuItem>
-                    <MenuItem value={20}>Clothing</MenuItem>
-                    <MenuItem value={30}>Others</MenuItem>
+                    <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                    <MenuItem value={"Clothing"}>Clothing</MenuItem>
+                    <MenuItem value={"Others"}>Others</MenuItem>
                   </Select>
                 </FormControl>
               </DropdownWrapper>
@@ -176,22 +177,43 @@ const AddProducts = () => {
 
             <Inputid>
               <Idname>PRODUCT NAME</Idname>
-              <Input></Input>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setProdname(e.target.value)}
+                />
+              </DropdownWrapper>
             </Inputid>
 
             <DescInputid>
               <Idname>DESCRIPTION</Idname>
-              <DescInput></DescInput>
+              <DropdownWrapper1>
+                <TextField
+                  id="outlined-multiline-static"
+                  multiline
+                  rows={3}
+                  fullWidth
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </DropdownWrapper1>
             </DescInputid>
 
             <Inputid>
               <Idname>PRICE</Idname>
-              <Input></Input>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </DropdownWrapper>
             </Inputid>
 
             <Inputid>
               <Idname>UPLOAD IMAGES</Idname>
-              <Box></Box>
               <Button variant="contained" component="label" color="success">
                 Upload
                 <input hidden accept="image/*" multiple type="file" />
@@ -199,7 +221,7 @@ const AddProducts = () => {
             </Inputid>
           </List>
         </Wrapper>
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={handleClick}>
           Add Product
         </Button>
       </Container>

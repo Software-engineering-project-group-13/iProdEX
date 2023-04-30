@@ -12,6 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import userReducer from "./userRedux";
 import favoriteReducer from "./favoriteRedux";
+import sellerItemsRedux from "./sellerItemsRedux";
 
 const persistConfig = {
   key: "root",
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     favorite: favoriteReducer,
     user: persistedReducer,
+    selleritems: sellerItemsRedux,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

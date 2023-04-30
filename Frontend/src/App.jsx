@@ -11,6 +11,7 @@ import ChangePassword from "./pages/ChangePassword";
 import NEVerification from "./pages/NEVerification";
 import Favorites from "./pages/Buyer/Favorites";
 import AddProducts from "./pages/Seller/AddProduct";
+import SellerItems from "./pages/Seller/ProductsPage";
 import { useSelector } from "react-redux";
 import ConfirmBuy from "./pages/Buyer/ConfirmBuy";
 
@@ -31,9 +32,9 @@ const App = () => {
       <Route path="/changepassword" element={<ChangePassword />} />
       <Route path="/neverification" element={<NEVerification />} />
       <Route path="/favorites/:userId" element={<Favorites />} />
-      <Route path="/addproducts" element={<AddProducts />} />
+      <Route path="/addproducts/:userId" element={<AddProducts />} />
+      <Route path="/selleritems/:userId" element={<SellerItems />} />
       <Route path="/confirmBuy" element={<ConfirmBuy />} />
-
     </Routes>
   );
 };
