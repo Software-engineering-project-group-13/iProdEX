@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
-  background-color: #1e285e;
+  background-color: #0e1832;
   margin-top: 50px;
   justify-content: space-around;
 `;

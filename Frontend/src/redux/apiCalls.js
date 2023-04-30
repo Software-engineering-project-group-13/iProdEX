@@ -9,7 +9,8 @@ import {
   logoutFailure,
 } from "./userRedux";
 
-import { addProduct, removeProduct } from "./favoriteRedux";
+import { addfavoriteProduct, removefavoriteProduct } from "./favoriteRedux";
+import { addsellerProduct, removesellerProduct } from "./sellerItemsRedux";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -45,7 +46,7 @@ export const addfavorite = async (dispatch, user, product) => {
     // console.log(product);
     const res = await publicRequest.post("/favorites/" + user, product);
     console.log(res.data);
-    dispatch(addProduct(res.data));
+    dispatch(addfavoriteProduct(res.data));
   } catch (err) {
     dispatch(err);
   }
@@ -56,7 +57,32 @@ export const removefavorite = async (dispatch, user, product) => {
   try {
     const res = await publicRequest.post("/favorites/delete/" + user, product);
     console.log(res.data);
-    dispatch(removeProduct(res.data));
+    dispatch(removefavoriteProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
+export const addProduct = async (dispatch, user, product) => {
+  try {
+    // console.log(product);
+    const res = await publicRequest.post("/selleritems/" + user, product);
+    console.log(res.data);
+    dispatch(addsellerProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
+export const removeProduct = async (dispatch, user, product) => {
+  console.log(product);
+  try {
+    const res = await publicRequest.post(
+      "/selleritems/delete/" + user,
+      product
+    );
+    console.log(res.data);
+    dispatch(removesellerProduct(res.data));
   } catch (err) {
     dispatch(err);
   }

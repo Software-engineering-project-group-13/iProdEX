@@ -39,7 +39,7 @@ const TableHeading = styled.div`
 const ItemHeading = styled.div`
   /* text-align: center; */
   padding-left: 5%;
-  width: 48%;
+  width: 47%;
   font-weight: 700;
   font-size: large;
 `;
@@ -60,7 +60,7 @@ const Container = styled.div`
 
 const Item = styled.div`
   height: 12vw;
-  background-color: #EAE3D2;
+  background-color: #eae3d2;
   width: 100%;
   display: flex;
   margin-top: 0.5%;
@@ -132,7 +132,7 @@ const ButtonWrapper = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #EAE3D2;
+  background-color: #eae3d2;
   border: none;
   padding-bottom: 4%;
   padding-top: 4%;

@@ -5,6 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -14,7 +15,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 50px;
-  background-color: #0E1832;
+  background-color: #0e1832;
   width: 100%;
   position: fixed;
   z-index: 5;
@@ -106,7 +107,7 @@ const ProfileOption = styled.button`
   align-items: center;
   justify-content: center;
   /* color: white; */
-  background-color: #1e285e;
+  background-color: #0e1832;
   padding: 0 10px;
   transition: filter 300ms;
   border: none;
@@ -122,8 +123,8 @@ const Dropdown = styled.div`
   width: 150px;
   transition: 1000ms;
   transform: ${(props) =>
-    props.login ? "translateX(-15%)" : "translateX(-78%)"};
-  background-color: #1e285e;
+    props.login ? "translateX(-50%)" : "translateX(-78%)"};
+  background-color: #0e1832;
   border-color: green;
   border-width: 100px;
   border-radius: 10px;
@@ -204,6 +205,15 @@ const Navbar = () => {
                   <MenuItemContainer>
                     <PersonIcon />
                     <Menudata>View Profile</Menudata>
+                  </MenuItemContainer>
+                </Link>
+                <Link
+                  to={"/selleritems/" + user._id}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <MenuItemContainer>
+                    <StorefrontIcon />
+                    <Menudata>Sell Items</Menudata>
                   </MenuItemContainer>
                 </Link>
                 <Link
