@@ -4,16 +4,16 @@ import styled from "styled-components";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 // import Button from "../../components/StyledComponents";
 // import { Link } from "react-router-dom";
-import { Dropdown } from 'react-bootstrap/Dropdown';
+// import { Dropdown } from 'react-bootstrap/Dropdown';
 
 const Filler = styled.div`
   height: 10vh;
@@ -42,11 +42,10 @@ const Wrapper = styled.div`
   padding-bottom: 1%;
 `;
 
-
 const List = styled.form`
   display: flex;
   flex-direction: column;
-  width: 80%; 
+  width: 80%;
   height: 100%;
   /* background-color: green;  */
 `;
@@ -121,7 +120,7 @@ const Box = styled.img`
   font-weight: 500;
   width: 30%;
   padding-left: 11%;
-`
+`;
 
 const Image = styled.img`
   height: 50vh;
@@ -135,17 +134,16 @@ const DropdownWrapper = styled.div`
   height: 1vw;
   height: 6vh;
   /* margin-bottom: 10%; */
-`
+`;
 
 // const FormControl = styled.div``;
 // const InputLabel = styled.div``;
 // const NativeSelect = styled.div``;
 
-const AddProducts = () => { 
+const AddProducts = () => {
+  const [age, setAge] = React.useState("");
 
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event : SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
   };
 
@@ -164,7 +162,7 @@ const AddProducts = () => {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    initialValue = "age"
+                    initialValue="age"
                     value={age}
                     onChange={handleChange}
                   >
