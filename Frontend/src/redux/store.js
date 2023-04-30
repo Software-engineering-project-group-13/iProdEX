@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./userRedux";
+import favoriteReducer from "./favoriteRedux";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
+    favorite: favoriteReducer,
     user: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>

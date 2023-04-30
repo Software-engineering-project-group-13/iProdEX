@@ -3,8 +3,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import { Link } from "react-router-dom";
 // import { useState } from "react";
+import { addfavorite } from "../redux/apiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 import { publicRequest } from "../requestMethods";
-import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 const Info = styled.div`
   opacity: 0;
@@ -29,6 +33,7 @@ const Container = styled.div`
   min-width: 350px;
   height: 350px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #cccfd0;
@@ -39,6 +44,13 @@ const Container = styled.div`
   &:hover ${Info} {
     opacity: 1;
   }
+`;
+
+const ProductName = styled.h2`
+  padding-top: 10px;
+  font-family: "Hind", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
 `;
 
 const Image = styled.img`
@@ -66,16 +78,39 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
-  console.log(item);
   const user = useSelector((state) => state.user.currentUser);
 
-  const handleFavorite = async () => {
-    try {
-      // console.log(productId.productId);
-      const res = await publicRequest.post("/favorites/" + item._id);
-      // console.log(res.data);
-      //   setProduct(res.data);
-    } catch {}
+  const [favorites, setFavorite] = useState({});
+
+  const dispatch = useDispatch();
+  let user_id;
+  if (user) user_id = user._id;
+  const productId = item._id;
+
+  const [button, setButton] = useState(false);
+
+  let v = 0;
+
+  const handleFavorite = (e) => {
+    // setButton(true);
+    e.preventDefault();
+
+    console.log(Object.keys(favorites).length);
+
+    for (let i = 0; i < Object.keys(favorites).length; ++i) {
+      if (favorites[i] === productId) {
+        v = v + 1;
+      }
+    }
+
+    console.log(v);
+    if (v === 0) {
+      addfavorite(dispatch, user_id, { productId });
+      // favorites.push(productId);
+      setFavorite([...favorites, productId]);
+    }
+    v = 0;
+    // setButton(false);
   };
 
   return (
@@ -83,7 +118,7 @@ const Product = ({ item }) => {
       <Image src={item.img[0]} />
       <Info>
         {user && (
-          <Icon onClick={handleFavorite()}>
+          <Icon disabled={button} onClick={handleFavorite}>
             <FavoriteBorderIcon />
           </Icon>
         )}
@@ -96,6 +131,7 @@ const Product = ({ item }) => {
           </Icon>
         </Link>
       </Info>
+      <ProductName>{item.title}</ProductName>
     </Container>
   );
 };

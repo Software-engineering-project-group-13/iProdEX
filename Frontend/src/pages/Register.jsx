@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import { signup } from "../redux/apiCalls";
 import Button from "../components/StyledComponents";
 import { useDispatch } from "react-redux";
+import GoogleIcon from "@mui/icons-material/Google";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 const Filler = styled.div`
   height: 10vh;
@@ -13,7 +15,7 @@ const Filler = styled.div`
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 150h; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +41,25 @@ const Wrapper1 = styled.div`
   display: flex;
   justify-content: center;
   font-size: 18px;
+`;
+
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: whitesmoke; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    /* background-color: whitesmoke; */
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.h1`
@@ -127,6 +148,31 @@ const Register = () => {
     });
   };
 
+  // const { googleSignIn } = UserAuth();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      // await googleSignIn();
+    } catch (err) {
+      console.log(err);
+    }
+    // signInWithPopup(auth, provider).then((data) => {
+    //   console.log(data);
+    //   let firstname = data.UserCredentialImpl.user.displayName;
+    //   let lastname = data.UserCredentialImpl.user.displayName;
+    //   let username = data.UserCredentialImpl.user.displayName;
+    //   let email = data.UserCredentialImpl.user.email;
+    //   let phonenumber = data.UserCredentialImpl.user.phonenumber;
+    //   signup(dispatch, {
+    //     firstname,
+    //     lastname,
+    //     username,
+    //     email,
+    //     phonenumber,
+    //   });
+    // });
+  };
+
   return (
     <div>
       <Navbar />
@@ -189,6 +235,14 @@ const Register = () => {
             </Link>
           </Middler1>
         </Wrapper>
+        <Wrapper1>
+          <Icon onClick={handleGoogleSignIn}>
+            <GoogleIcon />
+          </Icon>
+          <Icon>
+            <LocalPhoneIcon />
+          </Icon>
+        </Wrapper1>
         <Wrapper1>
           Already have an account?&ensp;
           <Link to="/login" style={{ color: "blue" }}>
