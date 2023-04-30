@@ -4,6 +4,7 @@ import { publicRequest } from "../requestMethods";
 import Product from "./Product";
 
 const Container = styled.div`
+  /* background-color: #7E8A97; */
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -17,7 +18,7 @@ const Products = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products");
-        console.log(typeof res.data);
+        // console.log(typeof res.data);
         setProducts(res.data);
       } catch {}
     };

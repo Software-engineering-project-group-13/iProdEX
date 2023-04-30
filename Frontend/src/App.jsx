@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Product from "./pages/Product";
 
 import Login from "./pages/Login";
@@ -11,6 +12,7 @@ import NEVerification from "./pages/NEVerification";
 import Favorites from "./pages/Buyer/Favorites";
 import AddProducts from "./pages/Seller/AddProduct";
 import { useSelector } from "react-redux";
+import ConfirmBuy from "./pages/Buyer/ConfirmBuy";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -19,6 +21,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile/:userId" element={<Profile />} />
+      <Route path="/editprofile/:userId" element={<EditProfile />} />
       <Route path="/product/:id" element={<Product />} />
       <Route
         path="/login"
@@ -29,6 +32,8 @@ const App = () => {
       <Route path="/neverification" element={<NEVerification />} />
       <Route path="/favorites/:userId" element={<Favorites />} />
       <Route path="/addproducts" element={<AddProducts />} />
+      <Route path="/confirmBuy" element={<ConfirmBuy />} />
+
     </Routes>
   );
 };

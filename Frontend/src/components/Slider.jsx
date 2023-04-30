@@ -1,7 +1,8 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import styled from "styled-components";
 import React, { useState } from "react";
-import { sliderItems } from "../slidesdata";
+import { sliderItems, sliderItems2 } from "../slidesdata";
+import { mobile } from "../responsive";
 
 const Filler = styled.div`
   height: 50px;
@@ -43,6 +44,15 @@ const Wrapper = styled.div`
   display: flex;
   transition: all 1.5s ease;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
+  ${mobile({ display: "none" })}
+`;
+
+const Wrapper1 = styled.div`
+  height: 100%;
+  display: none;
+  transition: all 0.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
+  ${mobile({ display: "flex" })}
 `;
 
 const Slide = styled.div`
@@ -87,6 +97,15 @@ const Slider = () => {
             </Slide>
           ))}
         </Wrapper>
+        <Wrapper1 slideIndex={slideIndex}>
+          {sliderItems2.map((item) => (
+            <Slide key={item.id}>
+              <ImgContainer>
+                <Image src={item.img} alt="computer" />
+              </ImgContainer>
+            </Slide>
+          ))}
+        </Wrapper1>
         <Arrow direction="right" onClick={() => handleClick("right")}>
           <ArrowRightOutlined />
         </Arrow>

@@ -3,11 +3,7 @@ const mongoose = require("mongoose");
 const favoritesSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true, unique: true },
-    products: [
-      {
-        type: String,
-      },
-    ],
+    products: [String],
   },
   { timestamps: true }
 );
