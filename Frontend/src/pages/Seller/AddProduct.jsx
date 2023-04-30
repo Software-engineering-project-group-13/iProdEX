@@ -2,9 +2,18 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import styled from "styled-components";
 import Footer from "../../components/Footer";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+// import Button from "../../components/StyledComponents";
 // import { Link } from "react-router-dom";
-import Button from "../../components/StyledComponents";
+import { Dropdown } from 'react-bootstrap/Dropdown';
 
 const Filler = styled.div`
   height: 10vh;
@@ -16,44 +25,50 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   /* background-color: green; */
-
-  /* flex-direction: column; */
   align-items: center;
-  justify-content: space-around;
+  flex-direction: column;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  height: 80vh;
+  /* height: 80%; */
+  width: 50%;
   /* width: 30vw; */
   /* background-color: yellow; */
+  padding-left: 10%;
+  padding-top: 2%;
   /* height: 1vh; */
+  padding-bottom: 1%;
 `;
 
-const Wrapper1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 70vh;
-  /* background-color: yellow; */
-  align-items: center;
-  justify-content: space-around;
-`;
 
 const List = styled.form`
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
-  width: 1vw;
+  width: 80%; 
+  height: 100%;
+  /* background-color: green;  */
 `;
 
-const Input = styled.p`
+const Input = styled.input`
   /* flex: 1; */
   width: 20vw;
-  margin: 0px 5px 20px 0px;
+  /* margin: 0px 5px 20px 0px; */
   padding: 10px;
-  padding-left: 10px;
+  border-radius: 5px;
+  border-color: white;
+  border: none;
+  box-shadow: 0px 0px 5px #ddd;
+  font-family: "DynaPuff", cursive;
+  font-weight: 500;
+`;
+
+const DescInput = styled.input`
+  /* flex: 1; */
+  width: 20vw;
+  /* margin: 0px 5px 20px 0px; */
+  padding: 10px;
   border-radius: 5px;
   border-color: white;
   border: none;
@@ -65,18 +80,25 @@ const Input = styled.p`
 const Inputid = styled.div`
   display: flex;
   margin: 1px;
-  width: 35vw;
-  /* background-color: red; */
-  /* align-items: center; */
   justify-content: space-between;
+  padding: 3%;
+  height: 7%;
+`;
+
+const DescInputid = styled.div`
+  display: flex;
+  margin: 1px;
+  justify-content: space-between;
+  padding: 3%;
+  height: 20%;
 `;
 
 const Idname = styled.p`
   color: black;
-  margin-bottom: 3px;
-  font-size: 15px;
-  font-weight: 500;
-  padding-top: 15px;
+  /* margin-bottom: 3px; */
+  font-size: 16px;
+  font-weight: 600;
+  padding-top: 2%;
 `;
 
 const Title = styled.h1`
@@ -87,6 +109,20 @@ const Title = styled.h1`
   /* background-color: blueviolet; */
 `;
 
+const Box = styled.img`
+  background-color: white;
+  /* padding: 10px; */
+  /* border-radius: 5px; */
+  /* border-color: yellow; */
+  border: none;
+  /* margin: 10px; */
+  /* box-shadow: 0px 0px 5px #ddd; */
+  font-family: "DynaPuff", cursive;
+  font-weight: 500;
+  width: 30%;
+  padding-left: 11%;
+`
+
 const Image = styled.img`
   height: 50vh;
   object-fit: cover;
@@ -94,18 +130,50 @@ const Image = styled.img`
   box-shadow: 0px 0px 5px #696969;
 `;
 
-const AddProducts = () => {
+const DropdownWrapper = styled.div`
+  width: 21.5vw;
+  height: 1vw;
+  height: 6vh;
+  /* margin-bottom: 10%; */
+`
+
+// const FormControl = styled.div``;
+// const InputLabel = styled.div``;
+// const NativeSelect = styled.div``;
+
+const AddProducts = () => { 
+
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event : SelectChangeEvent) => {
+    setAge(event.target.value);
+  };
+
   return (
     <div>
       <Navbar />
       <Filler></Filler>
       <Container>
         <Wrapper>
-          <Title> PROFILE </Title>
+          <Title> ADD PRODUCT DETAILS </Title>
           <List>
             <Inputid>
               <Idname>CATEGORY</Idname>
-              <Input></Input>
+              <DropdownWrapper>
+                <FormControl fullWidth>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    initialValue = "age"
+                    value={age}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={10}>Electronics</MenuItem>
+                    <MenuItem value={20}>Clothing</MenuItem>
+                    <MenuItem value={30}>Others</MenuItem>
+                  </Select>
+                </FormControl>
+              </DropdownWrapper>
             </Inputid>
 
             <Inputid>
@@ -113,10 +181,10 @@ const AddProducts = () => {
               <Input></Input>
             </Inputid>
 
-            <Inputid>
+            <DescInputid>
               <Idname>DESCRIPTION</Idname>
-              <Input></Input>
-            </Inputid>
+              <DescInput></DescInput>
+            </DescInputid>
 
             <Inputid>
               <Idname>PRICE</Idname>
@@ -125,16 +193,17 @@ const AddProducts = () => {
 
             <Inputid>
               <Idname>UPLOAD IMAGES</Idname>
-              <Input></Input>
+              <Box></Box>
+              <Button variant="contained" component="label" color="success">
+                Upload
+                <input hidden accept="image/*" multiple type="file" />
+              </Button>
             </Inputid>
           </List>
         </Wrapper>
-        <Wrapper1>
-          <Image src="https://th.bing.com/th/id/OIP.o2hpFnUg2tfIYjubSXiw7gHaKK?pid=ImgDet&rs=1"></Image>
-          <Button profile style={{ color: "white" }}>
-            Edit Profile
-          </Button>
-        </Wrapper1>
+        <Button variant="contained" color="success">
+          Add Product
+        </Button>
       </Container>
       <Footer />
     </div>

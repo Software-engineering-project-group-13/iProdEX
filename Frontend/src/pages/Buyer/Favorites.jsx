@@ -53,7 +53,7 @@ const Container = styled.div`
 
 const Item = styled.div`
   height: 12vw;
-  background-color: #ecf0f1;
+  background-color: #EAE3D2;
   width: 100%;
   display: flex;
   margin-top: 0.5%;
@@ -124,9 +124,10 @@ const ButtonWrapper = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ecf0f1;
+  background-color: #EAE3D2;
   border: none;
   padding-bottom: 4%;
+  padding-top: 4%;
   width: 10%;
 `;
 

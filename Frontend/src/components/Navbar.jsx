@@ -13,7 +13,7 @@ import { logout } from "../redux/apiCalls";
 
 const Container = styled.div`
   height: 50px;
-  background-color: #1e285e;
+  background-color: #0E1832;
   width: 100%;
   position: fixed;
   z-index: 5;

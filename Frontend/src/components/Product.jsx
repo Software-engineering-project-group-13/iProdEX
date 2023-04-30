@@ -20,24 +20,39 @@ const Info = styled.div`
   justify-content: center;
   transition: all 0.5s ease;
   border-radius: 15px;
+
+
 `;
 
 const Container = styled.div`
   flex: 1;
-  margin: 15px;
+  margin: 20px;
   /* padding: 10%; */
   min-width: 350px;
   height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #cccfd0;
+  background-color: #EAE3D2;
   position: relative;
-  border-radius: 15px;
-  background-image: radial-gradient(#1e285e 100px, #f6f8fa);
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px #ddd;
+  transition: all 0.4s ease-in-out; 
+
+  /* background-image: radial-gradient(#E7DEC8 100px, #f6f8fa); */
   /* background-image: linear-gradient(to bottom right, #1e285e, #f6f8fa); */
   &:hover ${Info} {
     opacity: 1;
+  }
+
+  /* &:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  } */
+
+  &:hover  {
+    transform: scale(1.03);
+    filter: brightness(1.2);
   }
 `;
 

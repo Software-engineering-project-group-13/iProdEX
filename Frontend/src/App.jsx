@@ -11,6 +11,7 @@ import NEVerification from "./pages/NEVerification";
 import Favorites from "./pages/Buyer/Favorites";
 import AddProducts from "./pages/Seller/AddProduct";
 import { useSelector } from "react-redux";
+import ConfirmBuy from "./pages/Buyer/ConfirmBuy";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -29,6 +30,8 @@ const App = () => {
       <Route path="/neverification" element={<NEVerification />} />
       <Route path="/favorites/:userId" element={<Favorites />} />
       <Route path="/addproducts" element={<AddProducts />} />
+      <Route path="/confirmBuy" element={<ConfirmBuy />} />
+
     </Routes>
   );
 };
