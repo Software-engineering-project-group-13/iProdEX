@@ -13,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 // import Button from "../../components/StyledComponents";
 // import { Link } from "react-router-dom";
-import { Dropdown } from 'react-bootstrap/Dropdown';
 
 const Filler = styled.div`
   height: 10vh;
