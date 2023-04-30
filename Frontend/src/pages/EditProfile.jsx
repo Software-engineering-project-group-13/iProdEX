@@ -20,7 +20,7 @@ const Container1 = styled.div`
 `;
 
 const Filler = styled.div`
-  height: 10px;
+  height: 10vh;
   /* background-color: red; */
 `;
 
@@ -106,6 +106,7 @@ const Idname = styled.p`
   font-size: 15px;
   font-weight: 500;
   padding-top: 15px;
+  margin-right: 20px;
 `;
 
 const Title = styled.h1`
@@ -211,7 +212,7 @@ const EditProfile = () => {
           <Wrapper1>
             <Image src="https://th.bing.com/th/id/OIP.o2hpFnUg2tfIYjubSXiw7gHaKK?pid=ImgDet&rs=1"></Image>
             <Button1 profile style={{ color: "white" }}>
-              Verify and Save
+              Save
             </Button1>
             <Button1 profile style={{ color: "white" }}>
               Delete profile

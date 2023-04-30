@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import TextField from "@mui/material/TextField";
+import { addProduct } from "../../redux/apiCalls";
 // import Button from "../../components/StyledComponents";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { Dropdown } from 'react-bootstrap/Dropdown';
 
 const Filler = styled.div`
@@ -149,18 +150,39 @@ const DropdownWrapper1 = styled.div`
 // const NativeSelect = styled.div``;
 
 const AddProducts = () => {
+  const user = useSelector((state) => state.user.currentUser);
+
   const [category, setCategory] = useState({});
   const [prodname, setProdname] = useState({});
   const [desc, setDesc] = useState({});
   const [price, setPrice] = useState({});
+  const [age, setAge] = useState({});
+  const [company, setCompany] = useState({});
+  const [image, setImage] = useState({});
 
   const handleChange = (e) => {
     setCategory(e.target.value);
   };
 
+  const onImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+    // console.log(image);
+  };
+
+  const dispatch = useDispatch();
   const handleClick = (e) => {
     e.preventDefault();
-    console.log({ category, prodname, desc, price });
+    addProduct(dispatch, user._id, {
+      category,
+      prodname,
+      desc,
+      price,
+      age,
+      company,
+      image,
+    });
   };
 
   return (
@@ -202,6 +224,30 @@ const AddProducts = () => {
               </DropdownWrapper>
             </Inputid>
 
+            <Inputid>
+              <Idname>COMPANY</Idname>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </DropdownWrapper>
+            </Inputid>
+
+            <Inputid>
+              <Idname>AGE</Idname>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setAge(e.target.value)}
+                />
+              </DropdownWrapper>
+            </Inputid>
+
             <DescInputid>
               <Idname>DESCRIPTION</Idname>
               <DropdownWrapper1>
@@ -229,10 +275,15 @@ const AddProducts = () => {
 
             <Inputid>
               <Idname>UPLOAD IMAGES</Idname>
-              <Button variant="contained" component="label" color="success">
+              <input
+                accept="image"
+                multiple
+                type="file"
+                onChange={onImageChange}
+              />
+              {/* <Button variant="contained" component="label" color="success">
                 Upload
-                <input hidden accept="image/*" multiple type="file" />
-              </Button>
+              </Button> */}
             </Inputid>
           </List>
         </Wrapper>

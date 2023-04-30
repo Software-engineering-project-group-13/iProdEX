@@ -10,7 +10,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removefavorite } from "../../redux/apiCalls";
+import { removeProduct } from "../../redux/apiCalls";
 
 const Filler = styled.div`
   height: 15vh;
@@ -196,7 +196,7 @@ const GetProductFromArr = (product_Id, user_id) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    removefavorite(dispatch, user._id, { productId });
+    removeProduct(dispatch, user._id, { productId });
   };
 
   return (
@@ -246,9 +246,9 @@ const SellerItems = () => {
   useEffect(() => {
     const getfavorites = async () => {
       try {
-        const res = await publicRequest.get("/selleritems/find/" + userId);
+        // console.log(user._id);
+        const res = await publicRequest.get("/selleritems/find/" + user._id);
         // console.log(res.data);
-        console.log(userId);
         setFavorite(res.data);
       } catch {}
     };
@@ -277,7 +277,7 @@ const SellerItems = () => {
         <Divider />
         {favorites &&
           favorites.products?.map((product) => (
-            <GetProductFromArr productId={product} user_id={userId} />
+            <GetProductFromArr productId={product} user_id={user._id} />
           ))}
         {!favorites && <Filler2 />}
       </Container>

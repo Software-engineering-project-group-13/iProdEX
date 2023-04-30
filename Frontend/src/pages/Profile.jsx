@@ -28,7 +28,7 @@ const Container = styled.div`
   display: flex;
   /* background-color: green; */
 
-  ${mobile({ flexDirection: "column-reverse" })};
+  ${mobile({ flexDirection: "column-reverse" })}
   align-items: center;
   justify-content: space-around;
 `;
