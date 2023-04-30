@@ -6,9 +6,11 @@ import Footer from "../components/Footer";
 import { signup } from "../redux/apiCalls";
 import Button from "../components/StyledComponents";
 import { useDispatch } from "react-redux";
+import { mobile } from "../responsive";
 
 const Filler = styled.div`
-  height: 10vh;
+  height: 80px;
+  ${mobile({ height: "160px" })}
 `;
 
 const Container = styled.div`
@@ -24,15 +26,18 @@ const Wrapper = styled.div`
   display: flex;
   padding: 20px;
   width: 30%;
+  ${mobile({ width: "70%" })}
   background-color: #f6f8fa;
   border-radius: 10px;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Wrapper1 = styled.div`
   margin-top: 20px;
   padding: 20px;
   width: 30%;
+  ${mobile({ width: "80%" })}
   background-color: #f6f8fa;
   color: blue;
   border-radius: 10px;
@@ -52,12 +57,14 @@ const List = styled.form`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  /* width: 150%; */
 `;
 
 const Input1 = styled.input`
   flex: 1;
   width: 13vw;
-  margin: 0px 5px 20px 0px;
+  ${mobile({ width: "28vw" })}
+  margin: 0px 5px 10px 0px;
   padding: 10px;
   border-radius: 5px;
   border-color: white;
@@ -78,7 +85,7 @@ const Input = styled.input`
 
 const Inputid = styled.div`
   display: flex;
-  margin: 1px;
+  margin: 0.5px;
   width: 20vw;
   /* align-items: center; */
   /* justify-content: center; */
@@ -94,7 +101,8 @@ const Idname = styled.p`
 
 const Middler = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
   width: 30vw;
 `;
 

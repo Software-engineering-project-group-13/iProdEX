@@ -5,6 +5,7 @@ const Container = styled.div`
   display: flex;
   background-color: #1e285e;
   margin-top: 50px;
+  justify-content: space-around;
 `;
 
 const C1 = styled.div`
@@ -18,6 +19,8 @@ const C2 = styled.div`
   color: white;
   /* background-color: cyan; */
   flex: 1;
+  //width: 20vw;
+  flex-direction: row;
   /* margin-top: 50px; */
   padding: 20px;
 `;
@@ -50,6 +53,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  margin-right: 30px;
 `;
 const Footer = () => {
   return (

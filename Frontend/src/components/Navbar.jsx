@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/apiCalls";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 50px;
@@ -17,6 +18,7 @@ const Container = styled.div`
   width: 100%;
   position: fixed;
   z-index: 5;
+  ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -25,14 +27,19 @@ const Wrapper = styled.div`
   padding-left: 5px;
   padding-top: 8px;
   justify-content: space-between;
+  ${mobile({ padding: "10px 0px", justifyContent: "space-around" })}
 `;
 
 const Left = styled.div`
   flex: 1;
   display: flex;
+  /* width: 50%; */
   align-items: center;
+  /* ${mobile({ width: "140%" })} */
   /* padding: 1px; */
-  justify-content: space-between;
+  /* background-color: red; */
+  /* overflow: hidden; */
+  justify-content: space-around;
 `;
 
 // const Language = styled.span`
@@ -76,7 +83,7 @@ const Center = styled.div`
   flex: 1;
   text-align: center;
   align-items: flex-start;
-  /* background-color: green; */
+  ${mobile({ flex: "none" })}/* background-color: green; */
 `;
 
 const Right = styled.div`
@@ -171,13 +178,14 @@ const Navbar = () => {
         <Right>
           {user && (
             <FavoriteOption>
-              <FavoriteBorderIcon style={{ color: "white", fontSize: 27 }} />
               <p>
                 <Link
                   to={"/favorites/" + user._id}
                   style={{ textDecoration: "none", color: "white" }}
                 >
-                  Favorites
+                  <FavoriteBorderIcon
+                    style={{ color: "white", fontSize: 27 }}
+                  />
                 </Link>
               </p>
             </FavoriteOption>

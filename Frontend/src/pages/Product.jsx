@@ -15,18 +15,20 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
-import "./css-styles/Product.css"
+import "./css-styles/Product.css";
+import { mobile } from "../responsive";
 
 const Filler = styled.div`
   height: 10vh;
 `;
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   /* align-items: center; */
   justify-content: center;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Wrapper1 = styled.div`
@@ -34,8 +36,10 @@ const Wrapper1 = styled.div`
   /* flex: 1; */
   margin-right: 10vw;
   flex-direction: column;
+  ${mobile({ flexDirection: "column" })}
   height: 80vh;
-  width: 25vw;
+  width: 50vw;
+  ${mobile({ width: "100%" })}
   align-items: center;
   justify-content: space-around;
   /* background-color: lightgray; */
@@ -110,7 +114,8 @@ const Wrapper2 = styled.div`
   flex-direction: column;
   /* align-items: flex-start; */
   /* background-color: yellow; */
-  width: 50vw;
+  width: 100%;
+  padding-left: 20px;
   height: 80vh;
   margin-top: 20px;
   /* margin-right: 27vw; */
@@ -156,6 +161,32 @@ const Comments = styled.div`
   padding: 5px;
 `;
 
+const Button1 = styled.button`
+  border: none;
+  padding: 12px 20px;
+  background-color: #00bf63;
+  margin: auto;
+  /* margin-top: 20px; */
+  border-radius: 5px;
+  :hover {
+    background-color: #00964d;
+    cursor: pointer;
+  }
+  width: 40vw;
+  font-weight: 700;
+  box-shadow: 0px 0px 5px #696969;
+
+  width: ${(props) => (props.profile ? "18vw" : "20vw")};
+  ${mobile({ width: "40vw" })}
+  ${mobile({ margin: "10px" })}
+  margin-bottom: ${(props) => (props.marginbelow ? "20px" : "10px")};
+
+  &:disabled {
+    color: gray;
+    cursor: not-allowed;
+  }
+`;
+
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -199,7 +230,7 @@ const Product = () => {
               >
                 {product.img?.map((c) => (
                   <SwiperSlide>
-                    <img src={c} alt={c}/>
+                    <img src={c} alt={c} />
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -211,12 +242,12 @@ const Product = () => {
             </Info> */}
           </ImageWrapper>
           <ButtonWrapper>
-            <Button marginbelow style={{ color: "white" }}>
+            <Button1 marginbelow style={{ color: "white" }}>
               Request Seller Contact
-            </Button>
-            <Button marginbelow style={{ color: "white" }}>
+            </Button1>
+            <Button1 marginbelow style={{ color: "white" }}>
               Buy Item
-            </Button>
+            </Button1>
           </ButtonWrapper>
         </Wrapper1>
         <Wrapper2>

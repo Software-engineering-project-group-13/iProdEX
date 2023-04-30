@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import Product from "./pages/Product";
 
 import Login from "./pages/Login";
@@ -19,6 +20,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/profile/:userId" element={<Profile />} />
+      <Route path="/editprofile/:userId" element={<EditProfile />} />
       <Route path="/product/:id" element={<Product />} />
       <Route
         path="/login"

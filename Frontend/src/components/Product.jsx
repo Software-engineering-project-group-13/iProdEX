@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // import { useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { useSelector } from "react-redux";
+import { mobile } from "../responsive";
 
 const Info = styled.div`
   opacity: 0;
@@ -26,6 +27,7 @@ const Container = styled.div`
   flex: 1;
   margin: 15px;
   /* padding: 10%; */
+  ${mobile({ width: "100px", height: "350px" })}
   min-width: 350px;
   height: 350px;
   display: flex;

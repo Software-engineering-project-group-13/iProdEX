@@ -1,15 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 import { userRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { SetStateAction } from "react";
 import Button from "../components/StyledComponents";
 import { mobile } from "../responsive";
+
 const Container1 = styled.div`
   width: 100%;
   display: flex;
@@ -18,7 +20,7 @@ const Container1 = styled.div`
 `;
 
 const Filler = styled.div`
-  height: 10vh;
+  height: 10px;
   /* background-color: red; */
 `;
 
@@ -28,7 +30,7 @@ const Container = styled.div`
   display: flex;
   /* background-color: green; */
 
-  ${mobile({ flexDirection: "column-reverse" })};
+  ${mobile({ flexDirection: "column-reverse" })}
   align-items: center;
   justify-content: space-around;
 `;
@@ -38,7 +40,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   height: 80vh;
-  /* width: 60%; */
+  /* width: 30vw; */
   /* background-color: yellow; */
   /* height: 1vh; */
 `;
@@ -57,13 +59,27 @@ const List = styled.form`
   /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: center;
-  /* width: 150%; */
+  /* width: 1vw; */
 `;
 
-const Input = styled.p`
+const Input = styled.input`
   /* flex: 1; */
   width: 20vw;
   ${mobile({ width: "40vw" })}
+  margin: 0px 5px 20px 0px;
+  padding: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+  border-color: white;
+  border: none;
+  box-shadow: 0px 0px 5px #ddd;
+  font-family: "DynaPuff", cursive;
+  font-weight: 500;
+`;
+
+const Input1 = styled.input`
+  /* flex: 1; */
+  width: 20vw;
   margin: 0px 5px 20px 0px;
   padding: 10px;
   padding-left: 10px;
@@ -90,7 +106,6 @@ const Idname = styled.p`
   font-size: 15px;
   font-weight: 500;
   padding-top: 15px;
-  margin-right: 20px;
 `;
 
 const Title = styled.h1`
@@ -134,7 +149,7 @@ const Button1 = styled.button`
   }
 `;
 
-const Profile = () => {
+const EditProfile = () => {
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
 
@@ -150,6 +165,9 @@ const Profile = () => {
     };
     getProfile();
   }, [userId]);
+
+  //   const [firstname, setFirstName] = useState({});
+
   return (
     <div>
       <Navbar />
@@ -161,37 +179,43 @@ const Profile = () => {
             <List>
               <Inputid>
                 <Idname>NAME</Idname>
-                <Input>{profile.firstname}</Input>
+                {/* <Input>{profile.firstname}</Input> */}
+                <Input defaultValue={profile.firstname} />
               </Inputid>
 
               <Inputid>
                 <Idname>USERNAME</Idname>
-                <Input>{profile.username}</Input>
+                {/* <Input>{profile.username}</Input> */}
+                <Input defaultValue={profile.username} />
               </Inputid>
 
               <Inputid>
                 <Idname>EMAIL</Idname>
-                <Input>{profile.email}</Input>
+                {/* <Input>{profile.email}</Input> */}
+                <Input value={profile.email} />
               </Inputid>
 
               <Inputid>
                 <Idname>ADDRESS</Idname>
-                <Input>Hyderabad</Input>
+                {/* <Input>Hyderabad</Input> */}
+                <Input defaultValue="Hyderabad" />
               </Inputid>
 
               <Inputid>
                 <Idname>MOBILE NO.</Idname>
-                <Input>{profile.phonenumber}</Input>
+                {/* <Input>{profile.phonenumber}</Input> */}
+                <Input defaultValue={profile.phonenumber} />
               </Inputid>
             </List>
           </Wrapper>
           <Wrapper1>
             <Image src="https://th.bing.com/th/id/OIP.o2hpFnUg2tfIYjubSXiw7gHaKK?pid=ImgDet&rs=1"></Image>
-            <Link to={"/editprofile/" + profile._id}>
-              <Button1 profile style={{ color: "white" }}>
-                Edit Profile
-              </Button1>
-            </Link>
+            <Button1 profile style={{ color: "white" }}>
+              Verify and Save
+            </Button1>
+            <Button1 profile style={{ color: "white" }}>
+              Delete profile
+            </Button1>
           </Wrapper1>
         </Container>
       </Container1>
@@ -200,4 +224,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default EditProfile;
