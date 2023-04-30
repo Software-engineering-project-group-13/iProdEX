@@ -17,7 +17,7 @@ const Products = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products");
-        console.log(typeof res.data);
+        // console.log(typeof res.data);
         setProducts(res.data);
       } catch {}
     };

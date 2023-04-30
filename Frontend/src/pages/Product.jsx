@@ -11,12 +11,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCube, Pagination } from "swiper";
+import { addfavorite, removefavorite } from "../redux/apiCalls";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 
 import "./css-styles/Product.css";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
 
 const Filler = styled.div`
   height: 10vh;
@@ -204,6 +206,38 @@ const Product = () => {
     getProduct();
   }, [id]);
 
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  let user_id;
+  if (user) user_id = user._id;
+  const productId = product._id;
+  // console.log(productId);
+  const [FavoriteText, setFavoriteText] = useState("Add To Favorites");
+
+  const [favorites, setFavorite] = useState({});
+  useEffect(() => {
+    const getfavorites = async () => {
+      try {
+        const res = await publicRequest.get("/favorites/find/" + user._id);
+        // console.log(res.data);
+        setFavorite(res.data);
+      } catch {}
+    };
+    getfavorites();
+  }, []);
+
+  const handleFavorite = (e) => {
+    e.preventDefault();
+    if (user) {
+      if (FavoriteText === "Add To Favorites") {
+        addfavorite(dispatch, user_id, { productId });
+        setFavoriteText("Remove From Favorites");
+      } else if (FavoriteText === "Remove From Favorites") {
+        removefavorite(dispatch, user_id, { productId });
+        setFavoriteText("Add To Favorites");
+      }
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -242,6 +276,22 @@ const Product = () => {
             </Info> */}
           </ImageWrapper>
           <ButtonWrapper>
+            {!user && (
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <Button marginbelow style={{ color: "white" }}>
+                  {FavoriteText}
+                </Button>
+              </Link>
+            )}
+            {user && (
+              <Button
+                marginbelow
+                style={{ color: "white" }}
+                onClick={handleFavorite}
+              >
+                {FavoriteText}
+              </Button>
+            )}
             <Button1 marginbelow style={{ color: "white" }}>
               Request Seller Contact
             </Button1>
