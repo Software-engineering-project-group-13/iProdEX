@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -6,14 +6,18 @@ import Footer from "../components/Footer";
 import { signup } from "../redux/apiCalls";
 import Button from "../components/StyledComponents";
 import { useDispatch } from "react-redux";
+import { mobile } from "../responsive";
+import GoogleIcon from "@mui/icons-material/Google";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 
 const Filler = styled.div`
-  height: 10vh;
+  height: 80px;
+  ${mobile({ height: "160px" })}
 `;
 
 const Container = styled.div`
   width: 100vw;
-  height: 100vh;
+  /* height: 150h; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,21 +28,43 @@ const Wrapper = styled.div`
   display: flex;
   padding: 20px;
   width: 30%;
+  ${mobile({ width: "70%" })}
   background-color: #f6f8fa;
   border-radius: 10px;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Wrapper1 = styled.div`
   margin-top: 20px;
   padding: 20px;
   width: 30%;
+  ${mobile({ width: "80%" })}
   background-color: #f6f8fa;
   color: blue;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   font-size: 18px;
+`;
+
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: whitesmoke; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    /* background-color: whitesmoke; */
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.h1`
@@ -52,12 +78,14 @@ const List = styled.form`
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  /* width: 150%; */
 `;
 
 const Input1 = styled.input`
   flex: 1;
   width: 13vw;
-  margin: 0px 5px 20px 0px;
+  ${mobile({ width: "28vw" })}
+  margin: 0px 5px 10px 0px;
   padding: 10px;
   border-radius: 5px;
   border-color: white;
@@ -78,7 +106,7 @@ const Input = styled.input`
 
 const Inputid = styled.div`
   display: flex;
-  margin: 1px;
+  margin: 0.5px;
   width: 20vw;
   /* align-items: center; */
   /* justify-content: center; */
@@ -94,7 +122,8 @@ const Idname = styled.p`
 
 const Middler = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
   width: 30vw;
 `;
 
@@ -125,6 +154,31 @@ const Register = () => {
       password,
       confirmpassword,
     });
+  };
+
+  // const { googleSignIn } = UserAuth();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      // await googleSignIn();
+    } catch (err) {
+      console.log(err);
+    }
+    // signInWithPopup(auth, provider).then((data) => {
+    //   console.log(data);
+    //   let firstname = data.UserCredentialImpl.user.displayName;
+    //   let lastname = data.UserCredentialImpl.user.displayName;
+    //   let username = data.UserCredentialImpl.user.displayName;
+    //   let email = data.UserCredentialImpl.user.email;
+    //   let phonenumber = data.UserCredentialImpl.user.phonenumber;
+    //   signup(dispatch, {
+    //     firstname,
+    //     lastname,
+    //     username,
+    //     email,
+    //     phonenumber,
+    //   });
+    // });
   };
 
   return (
@@ -189,6 +243,14 @@ const Register = () => {
             </Link>
           </Middler1>
         </Wrapper>
+        <Wrapper1>
+          <Icon onClick={handleGoogleSignIn}>
+            <GoogleIcon />
+          </Icon>
+          <Icon>
+            <LocalPhoneIcon />
+          </Icon>
+        </Wrapper1>
         <Wrapper1>
           Already have an account?&ensp;
           <Link to="/login" style={{ color: "blue" }}>

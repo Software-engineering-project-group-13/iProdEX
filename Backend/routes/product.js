@@ -8,7 +8,7 @@ const Product = require("../models/Products");
 
 // CREATE
 
-router.post("/:id/", verifyTokenAndAuthorization, async (req, res) => {
+router.post("/", verifyTokenAndAuthorization, async (req, res) => {
   const newProduct = new Product(req.body);
 
   try {

@@ -12,3 +12,18 @@ export const sliderItems = [
     img: require("./Images/Sports Equipment.png"),
   },
 ];
+
+export const sliderItems2 = [
+  {
+    id: 1,
+    img: require("./Images/1.png"),
+  },
+  {
+    id: 2,
+    img: require("./Images/2.png"),
+  },
+  {
+    id: 3,
+    img: require("./Images/3.png"),
+  },
+];

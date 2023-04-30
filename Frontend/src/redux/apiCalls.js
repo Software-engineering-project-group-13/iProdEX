@@ -9,6 +9,8 @@ import {
   logoutFailure,
 } from "./userRedux";
 
+import { addProduct, removeProduct } from "./favoriteRedux";
+
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   //   console.log(user);
@@ -35,5 +37,27 @@ export const logout = async (dispatch) => {
     dispatch(logoutSuccess());
   } catch (err) {
     dispatch(logoutFailure());
+  }
+};
+
+export const addfavorite = async (dispatch, user, product) => {
+  try {
+    // console.log(product);
+    const res = await publicRequest.post("/favorites/" + user, product);
+    console.log(res.data);
+    dispatch(addProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
+export const removefavorite = async (dispatch, user, product) => {
+  console.log(product);
+  try {
+    const res = await publicRequest.post("/favorites/delete/" + user, product);
+    console.log(res.data);
+    dispatch(removeProduct(res.data));
+  } catch (err) {
+    dispatch(err);
   }
 };

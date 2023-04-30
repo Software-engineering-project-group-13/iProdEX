@@ -6,16 +6,23 @@ import styled from "styled-components";
 import Navbar from "../../components/Navbar";
 import { publicRequest } from "../../requestMethods";
 import { useLocation } from "react-router-dom";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removefavorite } from "../../redux/apiCalls";
 
 const Filler = styled.div`
   height: 15vh;
 `;
 
+const Filler2 = styled.div`
+  height: 50vh;
+`;
+
 const Divider = styled.hr`
   background-color: lightgray;
-  width: 100%;
+  width: 102%;
   height: 3px;
   border: none;
 `;
@@ -32,21 +39,21 @@ const TableHeading = styled.div`
 const ItemHeading = styled.div`
   /* text-align: center; */
   padding-left: 5%;
-  width: 50%;
-  font-weight: 600;
+  width: 48%;
+  font-weight: 700;
   font-size: large;
 `;
 
 const PriceHeading = styled.div`
   width: 25%;
-  font-weight: 600;
+  font-weight: 700;
   font-size: large;
   /* text-align  : center; */
-  padding-left: 7%;
+  /* padding-left: 7%; */
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 96vw;
   /* height: 150vh; */
   justify-content: center;
 `;
@@ -105,6 +112,7 @@ const ProdCategory = styled.div`
 
 const ProdArrCategory = styled.div`
   display: flex;
+  /* background-color: yellow; */
 `;
 
 const PriceContainer = styled.div`
@@ -117,7 +125,7 @@ const PriceContainer = styled.div`
   text-align: center;
   /* background-color: lightcyan; */
   height: 85%;
-  width: 35%;
+  width: 20%;
 `;
 
 const ButtonWrapper = styled.button`
@@ -128,28 +136,59 @@ const ButtonWrapper = styled.button`
   border: none;
   padding-bottom: 4%;
   padding-top: 4%;
-  width: 10%;
+  width: 20%;
 `;
 
-const GetProductFromArr = (productId) => {
-  // console.log(productId);
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background-color: whitesmoke; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  transition: all 0.5s ease;
+
+  &:hover {
+    /* background-color: whitesmoke; */
+    transform: scale(1.1);
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
+`;
+
+const RemoveFromFavorites = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 93%;
+  padding-left: 5%;
+`;
+
+const GetProductFromArr = (product_Id, user_id) => {
+  const user = useSelector((state) => state.user.currentUser);
   const [product, setProduct] = useState({});
   useEffect(() => {
     const getProduct = async () => {
       try {
-        // console.log(productId.productId);
         const res = await publicRequest.get(
-          "/products/find/" + productId.productId
+          "/products/find/" + product_Id.productId
         );
-        // console.log(res.data);
         setProduct(res.data);
       } catch {}
     };
     getProduct();
-  }, [productId.productId]);
+  }, [product_Id.productId]);
 
-  // if (Object.keys(product).length !== 0) console.log(product);
-  const handleClick = () => {};
+  const productId = product_Id.productId;
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    removefavorite(dispatch, user._id, { productId });
+  };
+
   return (
     <>
       {Object.keys(product).length !== 0 && (
@@ -177,6 +216,11 @@ const GetProductFromArr = (productId) => {
               <Button>Product Details</Button>
             </Link>
           </ButtonWrapper>
+          <RemoveFromFavorites>
+            <Icon onClick={handleClick}>
+              <RemoveCircleOutlineIcon />
+            </Icon>
+          </RemoveFromFavorites>
         </Item>
       )}
     </>
@@ -193,11 +237,12 @@ const Favorites = () => {
       try {
         const res = await publicRequest.get("/favorites/find/" + userId);
         // console.log(res.data);
+        console.log(userId);
         setFavorite(res.data);
       } catch {}
     };
     getfavorites();
-  }, [userId]);
+  }, []);
 
   return (
     <div>
@@ -210,9 +255,11 @@ const Favorites = () => {
       </TableHeading>
       <Container>
         <Divider />
-        {favorites.products?.map((product) => (
-          <GetProductFromArr productId={product} />
-        ))}
+        {favorites &&
+          favorites.products?.map((product) => (
+            <GetProductFromArr productId={product} user_id={userId} />
+          ))}
+        {!favorites && <Filler2 />}
       </Container>
       <Footer />
     </div>
