@@ -7,14 +7,15 @@ const FavoriteSlice = createSlice({
     favoritesExist: false,
   },
   reducers: {
-    addProduct: (state, action) => {
+    addfavoriteProduct: (state, action) => {
       state.products.push(action.payload);
     },
-    removeProduct: (state, action) => {
+    removefavoriteProduct: (state, action) => {
       state.products.push(action.payload);
     },
   },
 });
 
-export const { addProduct, removeProduct } = FavoriteSlice.actions;
+export const { addfavoriteProduct, removefavoriteProduct } =
+  FavoriteSlice.actions;
 export default FavoriteSlice.reducer;

@@ -4,15 +4,17 @@ import styled from "styled-components";
 import Footer from "../../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import TextField from "@mui/material/TextField";
 // import Button from "../../components/StyledComponents";
 // import { Link } from "react-router-dom";
+// import { Dropdown } from 'react-bootstrap/Dropdown';
 
 const Filler = styled.div`
   height: 10vh;
@@ -20,7 +22,7 @@ const Filler = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   display: flex;
   /* background-color: green; */
@@ -41,11 +43,10 @@ const Wrapper = styled.div`
   padding-bottom: 1%;
 `;
 
-
 const List = styled.form`
   display: flex;
   flex-direction: column;
-  width: 80%; 
+  width: 80%;
   height: 100%;
   /* background-color: green;  */
 `;
@@ -104,6 +105,7 @@ const Title = styled.h1`
   font-size: 30px;
   font-weight: 750;
   /* margin: auto; */
+  padding-left: 18%;
   margin-bottom: 25px;
   /* background-color: blueviolet; */
 `;
@@ -120,7 +122,7 @@ const Box = styled.img`
   font-weight: 500;
   width: 30%;
   padding-left: 11%;
-`
+`;
 
 const Image = styled.img`
   height: 50vh;
@@ -134,18 +136,31 @@ const DropdownWrapper = styled.div`
   height: 1vw;
   height: 6vh;
   /* margin-bottom: 10%; */
-`
+`;
+
+const DropdownWrapper1 = styled.div`
+  width: 21.5vw;
+  height: 10vh;
+  /* margin-bottom: 10%; */
+`;
 
 // const FormControl = styled.div``;
 // const InputLabel = styled.div``;
 // const NativeSelect = styled.div``;
 
-const AddProducts = () => { 
+const AddProducts = () => {
+  const [category, setCategory] = useState({});
+  const [prodname, setProdname] = useState({});
+  const [desc, setDesc] = useState({});
+  const [price, setPrice] = useState({});
 
-  const [age, setAge] = React.useState('');
+  const handleChange = (e) => {
+    setCategory(e.target.value);
+  };
 
-  const handleChange = (event : SelectChangeEvent) => {
-    setAge(event.target.value);
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log({ category, prodname, desc, price });
   };
 
   return (
@@ -159,17 +174,17 @@ const AddProducts = () => {
             <Inputid>
               <Idname>CATEGORY</Idname>
               <DropdownWrapper>
-                <FormControl fullWidth>
+                <FormControl fullWidth size="small">
                   <Select
-                    labelId="demo-simple-select-label"
+                    labelId="demo-select-small-label"
                     id="demo-simple-select"
-                    initialValue = "age"
-                    value={age}
+                    initialValue="age"
+                    value={category}
                     onChange={handleChange}
                   >
-                    <MenuItem value={10}>Electronics</MenuItem>
-                    <MenuItem value={20}>Clothing</MenuItem>
-                    <MenuItem value={30}>Others</MenuItem>
+                    <MenuItem value={"Electronics"}>Electronics</MenuItem>
+                    <MenuItem value={"Clothing"}>Clothing</MenuItem>
+                    <MenuItem value={"Others"}>Others</MenuItem>
                   </Select>
                 </FormControl>
               </DropdownWrapper>
@@ -177,22 +192,43 @@ const AddProducts = () => {
 
             <Inputid>
               <Idname>PRODUCT NAME</Idname>
-              <Input></Input>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setProdname(e.target.value)}
+                />
+              </DropdownWrapper>
             </Inputid>
 
             <DescInputid>
               <Idname>DESCRIPTION</Idname>
-              <DescInput></DescInput>
+              <DropdownWrapper1>
+                <TextField
+                  id="outlined-multiline-static"
+                  multiline
+                  rows={3}
+                  fullWidth
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </DropdownWrapper1>
             </DescInputid>
 
             <Inputid>
               <Idname>PRICE</Idname>
-              <Input></Input>
+              <DropdownWrapper>
+                <TextField
+                  fullWidth
+                  id="fullWidth"
+                  size="small"
+                  onChange={(e) => setPrice(e.target.value)}
+                />
+              </DropdownWrapper>
             </Inputid>
 
             <Inputid>
               <Idname>UPLOAD IMAGES</Idname>
-              <Box></Box>
               <Button variant="contained" component="label" color="success">
                 Upload
                 <input hidden accept="image/*" multiple type="file" />
@@ -200,7 +236,7 @@ const AddProducts = () => {
             </Inputid>
           </List>
         </Wrapper>
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={handleClick}>
           Add Product
         </Button>
       </Container>
