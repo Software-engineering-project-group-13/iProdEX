@@ -11,6 +11,7 @@ const productSchema = new mongoose.Schema(
     desc: { type: String, required: true },
     img: { type: Array },
     price: { type: Number, required: true },
+    comments: [{ username: { type: String }, text: { type: String } }],
   },
   { timestamps: true }
 );

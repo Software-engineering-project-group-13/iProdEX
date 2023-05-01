@@ -27,14 +27,14 @@ const Container1 = styled.div`
   /* padding-right: 50px; */
   display: flex;
   justify-content: space-between;
-  background-color: #eae3d2;
+  background-color: #f6f8fa;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   padding: 20px;
   width: 30%;
-  background-color: #eae3d2;
+  background-color: #f6f8fa;
   /* background-color: lightcyan; */
   border-radius: 10px;
   flex-direction: column;
@@ -44,7 +44,7 @@ const Wrapper1 = styled.div`
   margin-top: 20px;
   padding: 20px;
   width: 30%;
-  background-color: #eae3d2;
+  background-color: #f6f8fa;
   /* background-color: lightcyan; */
   color: blue;
   border-radius: 10px;

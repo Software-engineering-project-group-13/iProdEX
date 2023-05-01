@@ -87,3 +87,28 @@ export const removeProduct = async (dispatch, user, product) => {
     dispatch(err);
   }
 };
+
+export const PostComment = async (dispatch, productid, comment) => {
+  console.log(comment);
+  try {
+    const res = await publicRequest.post(
+      "/products/update/" + productid,
+      comment
+    );
+    console.log(res.data);
+    // dispatch(removesellerProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
+export const updateProfile = async (dispatch, userid, profile) => {
+  console.log(profile);
+  try {
+    const res = await publicRequest.put("/users/" + userid, profile);
+    console.log(res.data);
+    // dispatch(removesellerProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};

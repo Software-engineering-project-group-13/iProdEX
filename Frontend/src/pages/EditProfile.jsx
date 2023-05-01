@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
 import { userRequest } from "../requestMethods";
@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import { SetStateAction } from "react";
 import Button from "../components/StyledComponents";
 import { mobile } from "../responsive";
+import { useDispatch } from "react-redux";
+import { updateProfile } from "../redux/apiCalls";
 
 const Container1 = styled.div`
   width: 100%;
@@ -124,6 +126,12 @@ const Image = styled.img`
   box-shadow: 0px 0px 5px #696969;
 `;
 
+const ButtonClick = styled.button`
+  background-color: white;
+  border: none;
+  width: 40vw;
+`;
+
 const Button1 = styled.button`
   border: none;
   padding: 12px 20px;
@@ -135,7 +143,7 @@ const Button1 = styled.button`
     background-color: #00964d;
     cursor: pointer;
   }
-  width: 40vw;
+  width: 100%;
   font-weight: 700;
   box-shadow: 0px 0px 5px #696969;
 
@@ -154,8 +162,7 @@ const EditProfile = () => {
   const location = useLocation();
   const userId = location.pathname.split("/")[2];
 
-  const [profile, setProfile] = useState({});
-
+  const dispatch = useDispatch();
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -166,8 +173,28 @@ const EditProfile = () => {
     };
     getProfile();
   }, [userId]);
+  const [profile, setProfile] = useState({});
+  const [firstname, setFirstName] = useState(profile.firstname);
+  const [lastname, setLastName] = useState(profile.lastname);
+  const [username, setUsername] = useState(profile.username);
+  const [email, setEmail] = useState(profile.email);
+  const [mobile, setMobile] = useState(profile.phonenumber);
+  const [password, setPassword] = useState(profile.password);
 
   //   const [firstname, setFirstName] = useState({});
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    updateProfile(dispatch, userId, {
+      firstname,
+      lastname,
+      username,
+      email,
+      mobile,
+      password,
+      password,
+    });
+  };
 
   return (
     <div>
@@ -179,15 +206,30 @@ const EditProfile = () => {
             <Title> PROFILE </Title>
             <List>
               <Inputid>
-                <Idname>NAME</Idname>
+                <Idname>FIRSTNAME</Idname>
                 {/* <Input>{profile.firstname}</Input> */}
-                <Input defaultValue={profile.firstname} />
+                <Input
+                  defaultValue={profile.firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </Inputid>
+
+              <Inputid>
+                <Idname>LASTNAME</Idname>
+                {/* <Input>{profile.username}</Input> */}
+                <Input
+                  defaultValue={profile.lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
               </Inputid>
 
               <Inputid>
                 <Idname>USERNAME</Idname>
                 {/* <Input>{profile.username}</Input> */}
-                <Input defaultValue={profile.username} />
+                <Input
+                  defaultValue={profile.username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </Inputid>
 
               <Inputid>
@@ -197,26 +239,38 @@ const EditProfile = () => {
               </Inputid>
 
               <Inputid>
-                <Idname>ADDRESS</Idname>
-                {/* <Input>Hyderabad</Input> */}
-                <Input defaultValue="Hyderabad" />
-              </Inputid>
-
-              <Inputid>
                 <Idname>MOBILE NO.</Idname>
                 {/* <Input>{profile.phonenumber}</Input> */}
-                <Input defaultValue={profile.phonenumber} />
+                <Input
+                  defaultValue={profile.phonenumber}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+              </Inputid>
+              <Inputid>
+                <Idname>NEW PASSWORD</Idname>
+                {/* <Input>{profile.phonenumber}</Input> */}
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                />
               </Inputid>
             </List>
           </Wrapper>
           <Wrapper1>
             <Image src="https://th.bing.com/th/id/OIP.o2hpFnUg2tfIYjubSXiw7gHaKK?pid=ImgDet&rs=1"></Image>
-            <Button1 profile style={{ color: "white" }}>
-              Save
-            </Button1>
-            <Button1 profile style={{ color: "white" }}>
+            <ButtonClick onClick={handleSave}>
+              <Link
+                to={"/profile/" + userId}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button1 profile style={{ color: "white" }}>
+                  Save
+                </Button1>
+              </Link>
+            </ButtonClick>
+            {/* <Button1 profile style={{ color: "white" }}>
               Delete profile
-            </Button1>
+            </Button1> */}
           </Wrapper1>
         </Container>
       </Container1>

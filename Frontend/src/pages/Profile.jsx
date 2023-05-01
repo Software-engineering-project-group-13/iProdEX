@@ -160,8 +160,13 @@ const Profile = () => {
             <Title> PROFILE </Title>
             <List>
               <Inputid>
-                <Idname>NAME</Idname>
+                <Idname>FIRSTNAME</Idname>
                 <Input>{profile.firstname}</Input>
+              </Inputid>
+
+              <Inputid>
+                <Idname>LASTNAME</Idname>
+                <Input>{profile.lastname}</Input>
               </Inputid>
 
               <Inputid>
@@ -172,11 +177,6 @@ const Profile = () => {
               <Inputid>
                 <Idname>EMAIL</Idname>
                 <Input>{profile.email}</Input>
-              </Inputid>
-
-              <Inputid>
-                <Idname>ADDRESS</Idname>
-                <Input>Hyderabad</Input>
               </Inputid>
 
               <Inputid>

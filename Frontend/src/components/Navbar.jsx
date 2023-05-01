@@ -154,6 +154,7 @@ const Menudata = styled.p`
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState({});
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
@@ -162,11 +163,11 @@ const Navbar = () => {
   };
 
   return (
-    <Container >
+    <Container>
       <Wrapper>
         <Left>
           <Link to="/">
-            <HomeButtonContainer >
+            <HomeButtonContainer>
               <HomeOutlined style={{ color: "white", fontSize: 30 }} />
             </HomeButtonContainer>
           </Link>

@@ -18,6 +18,9 @@ router.post("/:id/", async (req, res) => {
       categories: req.body.category,
       desc: req.body.desc,
       price: req.body.price,
+      age: req.body.age,
+      company: req.body.company,
+      img: req.body.image,
     });
 
     const savedProd = await newProd.save();
@@ -37,7 +40,8 @@ router.post("/:id/", async (req, res) => {
       // });
       // // res.status(201).json(isThere);
       // if (isThere.length === 0) {
-      favorite.products = [...favorite.products, prodId.toString()];
+      const id = prodId._id.toString();
+      favorite.products = [...favorite.products, id];
       const savedFavorite = await favorite.save();
       res.status(201).json(savedFavorite);
       // } else {
@@ -95,7 +99,9 @@ router.post("/delete/:id/", async (req, res) => {
 
 router.get("/find/:userId", async (req, res) => {
   try {
-    const favorite = await Favorite.findOne({ userId: req.params.userId });
+    const favorite = await Favorite.findOne({
+      userId: req.params.userId,
+    });
     res.status(201).json(favorite);
   } catch (err) {
     res.status(500).json(err);

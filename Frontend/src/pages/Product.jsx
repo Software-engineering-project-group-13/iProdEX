@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCube, Pagination } from "swiper";
-import { addfavorite, removefavorite } from "../redux/apiCalls";
+import { PostComment, addfavorite, removefavorite } from "../redux/apiCalls";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
@@ -210,6 +210,9 @@ const Submitbutton = styled.button`
 
   /* border-color: white; */
   box-shadow: 0px 0px 5px #696969;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Passed = styled.div`
@@ -299,6 +302,17 @@ const Product = () => {
       }
     }
   };
+
+  const [comments, setComments] = useState({});
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    PostComment(dispatch, productId, {
+      username: user.username,
+      text: comments,
+    });
+  };
+
   return (
     <div>
       <Navbar />
@@ -404,37 +418,20 @@ const Product = () => {
             <DescContent>{product.price}</DescContent>
           </Description>
           <Divider />
-          <Comments>
-            <Link to="\Comments" style={{ color: "blue" }}>
-              Comments
-            </Link>
-          </Comments>
+          user && (<Comments>Comments</Comments>
           <Typer>
-            <Inpbox></Inpbox>
-            <Submitbutton> Post </Submitbutton>
+            <Inpbox onChange={(e) => setComments(e.target.value)} />
+            <Submitbutton onClick={handleComment}> Post </Submitbutton>
           </Typer>
           <Passed>
-            <Single>
-              <Typerid> Vikas</Typerid>
-              <Passedcomment>
-                {" "}
-                Nice looking bat. Nice looking bat. Nice looking bat. Nice
-                looking bat. Nice looking bat. Nice looking bat. Nice looking
-                bat. Nice looking bat. Nice looking bat. Nice looking bat. Nice
-                looking bat. Nice looking bat.{" "}
-              </Passedcomment>
-            </Single>
-            <Single>
-              <Typerid> Vikas</Typerid>
-              <Passedcomment>
-                {" "}
-                Nice looking bat. Nice looking bat. Nice looking bat. Nice
-                looking bat. Nice looking bat. Nice looking bat. Nice looking
-                bat. Nice looking bat. Nice looking bat. Nice looking bat. Nice
-                looking bat. Nice looking bat.{" "}
-              </Passedcomment>
-            </Single>
+            {product.comments?.map((c) => (
+              <Single>
+                <Typerid>{c.username}</Typerid>
+                <Passedcomment> {c.text} </Passedcomment>
+              </Single>
+            ))}
           </Passed>
+          )
         </Wrapper2>
       </Container>
       <Footer />

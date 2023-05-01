@@ -133,6 +133,12 @@ const Image = styled.img`
   box-shadow: 0px 0px 5px #696969;
 `;
 
+const ButtonClick = styled.button`
+  background-color: white;
+  border: none;
+  /* width: 40vw; */
+`;
+
 const DropdownWrapper = styled.div`
   width: 21.5vw;
   height: 1vw;
@@ -289,9 +295,12 @@ const AddProducts = () => {
             </Inputid>
           </List>
         </Wrapper>
-        <Button variant="contained" color="success" onClick={handleClick}>
-          Add Product
-        </Button>
+        <ButtonClick onClick={handleClick}>
+          <Link to={"/selleritems/" + user._id}></Link>
+          <Button variant="contained" color="success">
+            Add Product
+          </Button>
+        </ButtonClick>
       </Container>
       <Footer />
     </div>

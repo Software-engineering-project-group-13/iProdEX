@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <Navbar />
       <Slider />
-      <Products />
+      <Products category="noCat" />
       <Footer />
     </div>
   );

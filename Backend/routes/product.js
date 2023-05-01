@@ -19,6 +19,18 @@ router.post("/", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
+router.post("/update/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  try {
+    product.comments = [...product.comments, req.body];
+    const savedProduct = await product.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // UPDATE;
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {
@@ -67,7 +79,7 @@ router.get("/", async (req, res) => {
     let product;
 
     if (qNew) {
-      product = await Product.find().sort({ createAt: -1 }).limit(5);
+      product = await Product.find().sort({ createAt: -1 }).limit(1);
     } else if (qCategory) {
       product = await Product.find({
         categories: {

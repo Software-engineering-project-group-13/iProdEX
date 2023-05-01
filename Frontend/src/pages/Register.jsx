@@ -104,6 +104,11 @@ const Input = styled.input`
   box-shadow: 0px 0px 5px #ddd;
 `;
 
+const ButtonClick = styled.button`
+  background-color: white;
+  border: none;
+`;
+
 const Inputid = styled.div`
   display: flex;
   margin: 0.5px;
@@ -233,24 +238,21 @@ const Register = () => {
             </Inputid>
           </List>
           <Middler1>
-            <Link
-              to="/neverification"
-              style={{ textDecoration: "none", color: "white" }}
-            >
-              <Button style={{ color: "white" }} onClick={handleClick}>
-                SIGNUP
-              </Button>
-            </Link>
+            <ButtonClick onClick={handleClick}>
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+                <Button style={{ color: "white" }}>SIGNUP</Button>
+              </Link>
+            </ButtonClick>
           </Middler1>
         </Wrapper>
-        <Wrapper1>
+        {/* <Wrapper1>
           <Icon onClick={handleGoogleSignIn}>
             <GoogleIcon />
           </Icon>
           <Icon>
             <LocalPhoneIcon />
           </Icon>
-        </Wrapper1>
+        </Wrapper1> */}
         <Wrapper1>
           Already have an account?&ensp;
           <Link to="/login" style={{ color: "blue" }}>

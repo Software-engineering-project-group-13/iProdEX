@@ -3,6 +3,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { sliderItems, sliderItems2 } from "../slidesdata";
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Filler = styled.div`
   height: 50px;
@@ -55,11 +56,18 @@ const Wrapper1 = styled.div`
   ${mobile({ display: "flex" })}
 `;
 
-const Slide = styled.div`
+const Slide = styled.button`
   width: 100vw;
   height: 100%;
   display: flex;
   align-items: center;
+  border: none;
+  background-color: white;
+  margin: 0%;
+  padding: 0%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -90,11 +98,13 @@ const Slider = () => {
         </Arrow>
         <Wrapper slideIndex={slideIndex}>
           {sliderItems.map((item) => (
-            <Slide key={item.id}>
-              <ImgContainer>
-                <Image src={item.img} alt="computer" />
-              </ImgContainer>
-            </Slide>
+            <Link to={"/searchresults/" + item.category}>
+              <Slide key={item.id}>
+                <ImgContainer>
+                  <Image src={item.img} alt="computer" />
+                </ImgContainer>
+              </Slide>
+            </Link>
           ))}
         </Wrapper>
         <Wrapper1 slideIndex={slideIndex}>
