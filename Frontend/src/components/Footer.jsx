@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -48,14 +49,16 @@ const List = styled.ul`
   padding: 0;
   list-style: none;
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
 `;
 const ListItem = styled.li`
-  width: 50%;
+  width: 40%;
   margin-bottom: 10px;
   margin-right: 30px;
 `;
 const Footer = () => {
+  const user = useSelector((state) => state.user.currentUser);
   return (
     <Container>
       <C1>
@@ -70,12 +73,12 @@ const Footer = () => {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="/favorites" style={{ color: "white" }}>
+            <Link to={"/favorites/" + user._id} style={{ color: "white" }}>
               Favorites
             </Link>
           </ListItem>
           <ListItem>
-            <Link to="/profile" style={{ color: "white" }}>
+            <Link to={"/profile/" + user._id} style={{ color: "white" }}>
               MyProfile
             </Link>
           </ListItem>
@@ -84,11 +87,11 @@ const Footer = () => {
               FAQs
             </Link>
           </ListItem>
-          <ListItem>
+          {/* <ListItem>
             <Link to="/register" style={{ color: "white" }}>
               Register
             </Link>
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem>Home</ListItem> */}
         </List>
       </C2>
