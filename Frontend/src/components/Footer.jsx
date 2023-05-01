@@ -72,16 +72,20 @@ const Footer = () => {
               Home
             </Link>
           </ListItem>
-          <ListItem>
-            <Link to={"/favorites/" + user._id} style={{ color: "white" }}>
-              Favorites
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link to={"/profile/" + user._id} style={{ color: "white" }}>
-              MyProfile
-            </Link>
-          </ListItem>
+          {user && (
+            <ListItem>
+              <Link to={"/favorites/" + user._id} style={{ color: "white" }}>
+                Favorites
+              </Link>
+            </ListItem>
+          )}
+          {user && (
+            <ListItem>
+              <Link to={"/profile/" + user._id} style={{ color: "white" }}>
+                MyProfile
+              </Link>
+            </ListItem>
+          )}
           <ListItem>
             <Link to="/FAQ" style={{ color: "white" }}>
               FAQs
