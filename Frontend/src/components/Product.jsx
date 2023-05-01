@@ -86,7 +86,8 @@ const Icon = styled.div`
   transition: all 0.5s ease;
 
   &:hover {
-    background-color: #3547af;
+    background-color: #0e1832;
+    color: white;
     transform: scale(1.1);
     cursor: pointer;
   }

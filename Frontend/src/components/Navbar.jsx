@@ -162,15 +162,15 @@ const Navbar = () => {
   };
 
   return (
-    <Container>
+    <Container >
       <Wrapper>
         <Left>
           <Link to="/">
-            <HomeButtonContainer>
+            <HomeButtonContainer >
               <HomeOutlined style={{ color: "white", fontSize: 30 }} />
             </HomeButtonContainer>
           </Link>
-          <SearchContainer>
+          <SearchContainer data-testid="navbar-1">
             <Search style={{ color: "#1e285e" }} />
             <Input placeholder="Search" />
           </SearchContainer>
