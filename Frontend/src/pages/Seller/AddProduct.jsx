@@ -11,7 +11,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import TextField from "@mui/material/TextField";
 // import Button from "../../components/StyledComponents";
 // import { Link } from "react-router-dom";
 // import { Dropdown } from 'react-bootstrap/Dropdown';
@@ -139,29 +138,15 @@ const DropdownWrapper = styled.div`
   /* margin-bottom: 10%; */
 `;
 
-const DropdownWrapper1 = styled.div`
-  width: 21.5vw;
-  height: 10vh;
-  /* margin-bottom: 10%; */
-`;
-
 // const FormControl = styled.div``;
 // const InputLabel = styled.div``;
 // const NativeSelect = styled.div``;
 
 const AddProducts = () => {
-  const [category, setCategory] = useState({});
-  const [prodname, setProdname] = useState({});
-  const [desc, setDesc] = useState({});
-  const [price, setPrice] = useState({});
+  const [age, setAge] = React.useState("");
 
-  const handleChange = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    console.log({ category, prodname, desc, price });
+  const handleChange = (event) => {
+    setAge(event.target.value);
   };
 
   return (
@@ -180,7 +165,7 @@ const AddProducts = () => {
                     labelId="demo-select-small-label"
                     id="demo-simple-select"
                     initialValue="age"
-                    value={category}
+                    value={age}
                     onChange={handleChange}
                   >
                     <MenuItem value={"Electronics"}>Electronics</MenuItem>
