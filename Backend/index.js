@@ -24,6 +24,8 @@ app.use("/api/products", productRoute);
 app.use("/api/favorites", favoriteRoute);
 app.use("/api/selleritems", selleritemsRoute);
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("Server is running");
 });
+
+module.exports = app;

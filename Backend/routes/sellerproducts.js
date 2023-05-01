@@ -110,7 +110,7 @@ router.get("/find/:userId", async (req, res) => {
 
 // GET ALL
 
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const favorites = await Favorite.find();
     res.status(201).json(favorites);
