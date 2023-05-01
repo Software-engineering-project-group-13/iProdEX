@@ -155,6 +155,10 @@ const Divider = styled.hr`
   border: none;
 `;
 
+const CommentsContainer = styled.div`
+  width: 100%;
+`
+
 const Comments = styled.div`
   border: 2px solid lightgray;
   display: flex;
@@ -162,7 +166,10 @@ const Comments = styled.div`
   margin-top: 50px;
   font-weight: 500;
   padding: 5px 0px 5px 0px;
-  width: 80%;
+  background-color: #0e1832;
+  color: white;
+  border-radius: 5px;
+  width: 98%;
 `;
 
 const Button1 = styled.button`
@@ -193,7 +200,7 @@ const Button1 = styled.button`
 const Typer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 98%;
   height: 10%;
   border: none;
   margin-top: 5px;
@@ -222,7 +229,7 @@ const Passed = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5px;
-  width: 80%;
+  width: 98%;
   height: 40vh;
   overflow: scroll;
   border-width: 10px;
@@ -230,27 +237,43 @@ const Passed = styled.div`
 `;
 
 const Single = styled.div`
-  width: 96%;
+  width: 100%;
+  height: 15%;
   display: flex;
+  box-shadow: 0px 0px 5px #ddd;
+
   /* overflow: unset; */
-  flex-direction: column;
-  background-color: #c4c1c1;
+  /* flex-direction: column; */
+  /* background-color: blue; */
   margin-top: 10px;
   border-radius: 5px;
+  align-items: center;
+  border: none;
+
+  /* background-color: ; */
   /* height: 20px; */
 `;
 
 const Typerid = styled.text`
-  padding-left: 5px;
+  height: 70%;
+  /* padding-left: 20px; */
   padding-top: 5px;
-  font-size: large;
-  font-weight: 500;
+  font-size: 110%;
+  font-weight: 600;
   background-color: #eae3d2;
   border-radius: 5px;
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
 `;
 
+
 const Passedcomment = styled.text`
-  padding-left: 5px;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  margin-left: 1%;
+  padding-left: 7px;
   padding-bottom: 5px;
   padding-top: 5px;
 `;
@@ -425,7 +448,7 @@ const Product = () => {
           </Description>
           <Divider />
           {user && (
-            <div>
+            <CommentsContainer>
               <Comments>Comments</Comments>
               <Typer>
                 <Inpbox onChange={(e) => setComments(e.target.value)} />
@@ -439,7 +462,7 @@ const Product = () => {
                   </Single>
                 ))}
               </Passed>
-            </div>
+            </CommentsContainer>
           )}
         </Wrapper2>
       </Container>
