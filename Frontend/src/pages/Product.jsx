@@ -194,6 +194,8 @@ const Typer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80%;
+  height: 10%;
+  border: none;
   margin-top: 5px;
 `;
 
@@ -275,7 +277,7 @@ const Product = () => {
   let user_id;
   if (user) user_id = user._id;
   const productId = product._id;
-  // console.log(productId);
+  console.log(user);
   const [FavoriteText, setFavoriteText] = useState("Add To Favorites");
 
   const [favorites, setFavorite] = useState({});
@@ -367,12 +369,16 @@ const Product = () => {
                 {FavoriteText}
               </Button>
             )}
-            <Button1 marginbelow style={{ color: "white" }}>
-              Request Seller Contact
-            </Button1>
-            <Button1 marginbelow style={{ color: "white" }}>
-              Buy Item
-            </Button1>
+            {user && (
+              <div>
+                <Button1 marginbelow style={{ color: "white" }}>
+                  Request Seller Contact
+                </Button1>
+                <Button1 marginbelow style={{ color: "white" }}>
+                  Buy Item
+                </Button1>
+              </div>
+            )}
           </ButtonWrapper>
         </Wrapper1>
         <Wrapper2>
@@ -418,20 +424,23 @@ const Product = () => {
             <DescContent>{product.price}</DescContent>
           </Description>
           <Divider />
-          user && (<Comments>Comments</Comments>
-          <Typer>
-            <Inpbox onChange={(e) => setComments(e.target.value)} />
-            <Submitbutton onClick={handleComment}> Post </Submitbutton>
-          </Typer>
-          <Passed>
-            {product.comments?.map((c) => (
-              <Single>
-                <Typerid>{c.username}</Typerid>
-                <Passedcomment> {c.text} </Passedcomment>
-              </Single>
-            ))}
-          </Passed>
-          )
+          {user && (
+            <div>
+              <Comments>Comments</Comments>
+              <Typer>
+                <Inpbox onChange={(e) => setComments(e.target.value)} />
+                <Submitbutton onClick={handleComment}> Post </Submitbutton>
+              </Typer>
+              <Passed>
+                {product.comments?.map((c) => (
+                  <Single>
+                    <Typerid>{c.username}</Typerid>
+                    <Passedcomment> {c.text} </Passedcomment>
+                  </Single>
+                ))}
+              </Passed>
+            </div>
+          )}
         </Wrapper2>
       </Container>
       <Footer />
