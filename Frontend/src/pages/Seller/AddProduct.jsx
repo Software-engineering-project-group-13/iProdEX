@@ -11,8 +11,8 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import TextField from "@mui/material/TextField";
 import { addProduct } from "../../redux/apiCalls";
+import TextField from "@mui/material/TextField";
 // import Button from "../../components/StyledComponents";
 import { Link } from "react-router-dom";
 // import { Dropdown } from 'react-bootstrap/Dropdown';
@@ -141,6 +141,7 @@ const DropdownWrapper = styled.div`
 
 const DropdownWrapper1 = styled.div`
   width: 21.5vw;
+  height: 1vw;
   height: 10vh;
   /* margin-bottom: 10%; */
 `;
@@ -201,7 +202,7 @@ const AddProducts = () => {
                     labelId="demo-select-small-label"
                     id="demo-simple-select"
                     initialValue="age"
-                    value={category}
+                    value={age}
                     onChange={handleChange}
                   >
                     <MenuItem value={"Electronics"}>Electronics</MenuItem>

@@ -19,6 +19,7 @@ import "swiper/css/pagination";
 import "./css-styles/Product.css";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+// import Button from "../components/StyledComponents";
 
 const Filler = styled.div`
   height: 10vh;
@@ -26,7 +27,7 @@ const Filler = styled.div`
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   /* align-items: center; */
   justify-content: center;
@@ -118,7 +119,7 @@ const Wrapper2 = styled.div`
   /* background-color: yellow; */
   width: 100%;
   padding-left: 20px;
-  height: 80vh;
+  /* height: 80vh; */
   margin-top: 20px;
   /* margin-right: 27vw; */
 `;
@@ -160,7 +161,8 @@ const Comments = styled.div`
   justify-content: center;
   margin-top: 50px;
   font-weight: 500;
-  padding: 5px;
+  padding: 5px 0px 5px 0px;
+  width: 80%;
 `;
 
 const Button1 = styled.button`
@@ -187,6 +189,65 @@ const Button1 = styled.button`
     color: gray;
     cursor: not-allowed;
   }
+`;
+const Typer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-top: 5px;
+`;
+
+const Inpbox = styled.input`
+  width: 78%;
+  border-radius: 5px;
+`;
+
+const Submitbutton = styled.button`
+  width: 20%;
+  background-color: #00bf63;
+  border-radius: 5px;
+  border: none;
+
+  /* border-color: white; */
+  box-shadow: 0px 0px 5px #696969;
+`;
+
+const Passed = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  width: 80%;
+  height: 40vh;
+  overflow: scroll;
+  border-width: 10px;
+  border-color: black;
+`;
+
+const Single = styled.div`
+  width: 96%;
+  display: flex;
+  /* overflow: unset; */
+  flex-direction: column;
+  background-color: #c4c1c1;
+  margin-top: 10px;
+  border-radius: 5px;
+  /* height: 20px; */
+`;
+
+const Typerid = styled.text`
+  padding-left: 5px;
+  padding-top: 5px;
+  font-size: large;
+  font-weight: 500;
+  background-color: #eae3d2;
+  border-radius: 5px;
+`;
+
+const Passedcomment = styled.text`
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 `;
 
 const Product = () => {
@@ -348,6 +409,32 @@ const Product = () => {
               Comments
             </Link>
           </Comments>
+          <Typer>
+            <Inpbox></Inpbox>
+            <Submitbutton> Post </Submitbutton>
+          </Typer>
+          <Passed>
+            <Single>
+              <Typerid> Vikas</Typerid>
+              <Passedcomment>
+                {" "}
+                Nice looking bat. Nice looking bat. Nice looking bat. Nice
+                looking bat. Nice looking bat. Nice looking bat. Nice looking
+                bat. Nice looking bat. Nice looking bat. Nice looking bat. Nice
+                looking bat. Nice looking bat.{" "}
+              </Passedcomment>
+            </Single>
+            <Single>
+              <Typerid> Vikas</Typerid>
+              <Passedcomment>
+                {" "}
+                Nice looking bat. Nice looking bat. Nice looking bat. Nice
+                looking bat. Nice looking bat. Nice looking bat. Nice looking
+                bat. Nice looking bat. Nice looking bat. Nice looking bat. Nice
+                looking bat. Nice looking bat.{" "}
+              </Passedcomment>
+            </Single>
+          </Passed>
         </Wrapper2>
       </Container>
       <Footer />
