@@ -62,16 +62,18 @@ const Container = styled.div`
 `;
 
 const ProductName = styled.h2`
-  padding-top: 10px;
-  font-family: "Hind", sans-serif;
+  padding-top: 15px;
+  /* font-family: "Hind", sans-serif; */
+  font-family: "Roboto Condensed", sans-serif;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 21px;
+  color: #0e1832;
 `;
 
 const Image = styled.img`
-  height: 80%;
-  width: 85%;
-  object-fit: contain;
+  height: 50%;
+  width: 50%;
+  /* object-fit: contain; */
 `;
 
 const Icon = styled.div`
@@ -147,7 +149,8 @@ const Product = ({ item }) => {
           </Icon>
         </Link>
       </Info>
-      <ProductName>{item.title}</ProductName>
+      <ProductName>{item.company} {item.title}</ProductName>
+      <ProductName>Rs.{item.price}</ProductName>
     </Container>
   );
 };

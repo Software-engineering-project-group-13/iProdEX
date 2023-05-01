@@ -1,14 +1,29 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import Slider from "../../components/Slider";
 import Products from "../../components/Products";
 import { useLocation } from "react-router";
 import styled from "styled-components";
 
 const Filler = styled.div`
-  height: 50px;
+  height: 12vh;
 `;
+
+const Heading = styled.h1`
+  display: flex;
+  justify-content: center;
+  height: 10vh;
+  /* margin: 3%; */
+  padding: 2%;
+  color: #0e1832;
+  font-size: xxx-large;
+  background-color: #9BA4B5;
+  box-shadow: 10px 10px 10px #ddd;
+  /* background-image: linear-gradient(to bottom right, #9BA4B5, #f6f8fa); */
+  /* background-image: radial-gradient(#9BA4B5 100px, #f6f8fa); */
+
+`
+
 
 const SearchResults = () => {
   const location = useLocation();
@@ -16,7 +31,8 @@ const SearchResults = () => {
   return (
     <div>
       <Navbar />
-      <Filler />
+      <Filler>HI</Filler>
+      <Heading>{category}</Heading>
       <Products category={category} />
       <Footer />
     </div>
