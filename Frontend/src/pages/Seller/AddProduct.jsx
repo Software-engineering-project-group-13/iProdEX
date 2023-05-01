@@ -42,6 +42,7 @@ const Wrapper = styled.div`
   padding-top: 2%;
   /* height: 1vh; */
   padding-bottom: 1%;
+  /* background-color: #eae3d2; */
 `;
 
 const List = styled.form`
