@@ -11,7 +11,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCube, Pagination } from "swiper";
-import { PostComment, addfavorite, removefavorite } from "../redux/apiCalls";
+import {
+  PostComment,
+  PostRequest,
+  addfavorite,
+  removefavorite,
+} from "../redux/apiCalls";
 import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
@@ -157,7 +162,7 @@ const Divider = styled.hr`
 
 const CommentsContainer = styled.div`
   width: 100%;
-`
+`;
 
 const Comments = styled.div`
   border: 2px solid lightgray;
@@ -267,7 +272,6 @@ const Typerid = styled.text`
   justify-content: space-around;
 `;
 
-
 const Passedcomment = styled.text`
   width: 100%;
   background-color: whitesmoke;
@@ -292,7 +296,10 @@ const Product = () => {
         setProduct(res.data);
       } catch {}
     };
-    getProduct();
+    const intervalId = setInterval(() => {
+      getProduct();
+    }, 500);
+    return () => clearInterval(intervalId);
   }, [id]);
 
   const user = useSelector((state) => state.user.currentUser);
@@ -300,7 +307,7 @@ const Product = () => {
   let user_id;
   if (user) user_id = user._id;
   const productId = product._id;
-  console.log(user);
+  // console.log(user);
   const [FavoriteText, setFavoriteText] = useState("Add To Favorites");
 
   const [favorites, setFavorite] = useState({});
@@ -335,6 +342,14 @@ const Product = () => {
     PostComment(dispatch, productId, {
       username: user.username,
       text: comments,
+    });
+  };
+
+  const RequestSeller = (e) => {
+    e.preventDefault();
+    PostRequest(dispatch, productId, {
+      username: user.username,
+      status: false,
     });
   };
 
@@ -394,11 +409,12 @@ const Product = () => {
             )}
             {user && (
               <div>
-                <Button1 marginbelow style={{ color: "white" }}>
+                <Button1
+                  marginbelow
+                  style={{ color: "white" }}
+                  onClick={RequestSeller}
+                >
                   Request Seller Contact
-                </Button1>
-                <Button1 marginbelow style={{ color: "white" }}>
-                  Buy Item
                 </Button1>
               </div>
             )}

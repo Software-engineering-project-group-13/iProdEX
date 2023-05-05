@@ -15,6 +15,7 @@ import SellerItems from "./pages/Seller/ProductsPage";
 import { useSelector } from "react-redux";
 import ConfirmBuy from "./pages/Buyer/ConfirmBuy";
 import SearchResults from "./pages/Buyer/SearchResults";
+import ProductDetailsPage from "./pages/Seller/ProductDetailsPage";
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser);
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="/favorites/:userId" element={<Favorites />} />
       <Route path="/addproducts/:userId" element={<AddProducts />} />
       <Route path="/searchresults/:category" element={<SearchResults />} />
+      <Route path="/sellerproduct/:id" element={<ProductDetailsPage />} />
       <Route path="/selleritems/:userId" element={<SellerItems />} />
       <Route path="/confirmBuy" element={<ConfirmBuy />} />
     </Routes>

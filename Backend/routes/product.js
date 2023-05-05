@@ -31,6 +31,30 @@ router.post("/update/:id", async (req, res) => {
   }
 });
 
+router.post("/request/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  try {
+    product.requests = [...product.requests, req.body];
+    const savedProduct = await product.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.post("/status/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  try {
+    product.requests.status = !product.requests.status;
+    const savedProduct = await product.save();
+    res.status(200).json(savedProduct);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // UPDATE;
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
   try {

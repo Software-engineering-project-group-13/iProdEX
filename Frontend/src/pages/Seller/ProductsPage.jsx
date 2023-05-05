@@ -11,6 +11,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeProduct } from "../../redux/apiCalls";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const Filler = styled.div`
   height: 15vh;
@@ -176,9 +182,23 @@ const RemoveFromFavorites = styled.div`
   padding-left: 5%;
 `;
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const GetProductFromArr = (product_Id, user_id) => {
   const user = useSelector((state) => state.user.currentUser);
   const [product, setProduct] = useState({});
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -188,13 +208,17 @@ const GetProductFromArr = (product_Id, user_id) => {
         setProduct(res.data);
       } catch {}
     };
-    getProduct();
+    const intervalId = setInterval(() => {
+      getProduct();
+    }, 500);
+    return () => clearInterval(intervalId);
   }, [product_Id.productId]);
 
   const productId = product_Id.productId;
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
+    setOpen(false);
     e.preventDefault();
     removeProduct(dispatch, user._id, { productId });
   };
@@ -220,17 +244,39 @@ const GetProductFromArr = (product_Id, user_id) => {
           <PriceContainer>{product.price}</PriceContainer>
           <ButtonWrapper>
             <Link
-              to={"/product/" + product._id}
+              to={"/sellerproduct/" + product._id}
               style={{ textDecoration: "none", color: "black" }}
             >
               <Button>Product Details</Button>
             </Link>
           </ButtonWrapper>
           <RemoveFromFavorites>
-            <Icon onClick={handleClick}>
+            <Icon onClick={handleClickOpen}>
               <RemoveCircleOutlineIcon />
             </Icon>
           </RemoveFromFavorites>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Alert"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Do you want to remove the product from purcase
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button popup onClick={handleClick}>
+                Yes
+              </Button>
+              <Button popup onClick={handleClose}>
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Item>
       )}
     </>

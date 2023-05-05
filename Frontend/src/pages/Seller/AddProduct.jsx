@@ -209,12 +209,12 @@ const AddProducts = () => {
                     labelId="demo-select-small-label"
                     id="demo-simple-select"
                     initialValue="age"
-                    value={age}
+                    value={category}
                     onChange={handleChange}
                   >
                     <MenuItem value={"Electronics"}>Electronics</MenuItem>
                     <MenuItem value={"Clothing"}>Clothing</MenuItem>
-                    <MenuItem value={"Others"}>Others</MenuItem>
+                    <MenuItem value={"Sports"}>Sports</MenuItem>
                   </Select>
                 </FormControl>
               </DropdownWrapper>
@@ -296,10 +296,11 @@ const AddProducts = () => {
           </List>
         </Wrapper>
         <ButtonClick onClick={handleClick}>
-          <Link to={"/selleritems/" + user._id}></Link>
-          <Button variant="contained" color="success">
-            Add Product
-          </Button>
+          <Link to={"/selleritems/" + user._id}>
+            <Button variant="contained" color="success">
+              Add Product
+            </Button>
+          </Link>
         </ButtonClick>
       </Container>
       <Footer />

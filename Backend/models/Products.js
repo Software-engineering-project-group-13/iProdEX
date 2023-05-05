@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema(
     img: { type: Array },
     price: { type: Number, required: true },
     comments: [{ username: { type: String }, text: { type: String } }],
+    requests: [{ username: { type: String }, status: { type: Boolean } }],
   },
   { timestamps: true }
 );

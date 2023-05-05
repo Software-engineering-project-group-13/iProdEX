@@ -102,6 +102,34 @@ export const PostComment = async (dispatch, productid, comment) => {
   }
 };
 
+export const PostRequest = async (dispatch, productid, request) => {
+  console.log(request);
+  try {
+    const res = await publicRequest.post(
+      "/products/request/" + productid,
+      request
+    );
+    console.log(res.data);
+    // dispatch(removesellerProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
+export const ChangeStatus = async (dispatch, productid, userid) => {
+  console.log(userid);
+  try {
+    const res = await publicRequest.post(
+      "/products/status/" + productid,
+      userid
+    );
+    console.log(res.data);
+    // dispatch(removesellerProduct(res.data));
+  } catch (err) {
+    dispatch(err);
+  }
+};
+
 export const updateProfile = async (dispatch, userid, profile) => {
   console.log(profile);
   try {

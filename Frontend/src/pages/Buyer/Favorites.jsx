@@ -11,6 +11,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removefavorite } from "../../redux/apiCalls";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Slide from "@mui/material/Slide";
 
 const Filler = styled.div`
   height: 15vh;
@@ -166,9 +172,23 @@ const RemoveFromFavorites = styled.div`
   padding-left: 5%;
 `;
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
+
 const GetProductFromArr = (product_Id, user_id) => {
   const user = useSelector((state) => state.user.currentUser);
   const [product, setProduct] = useState({});
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -185,6 +205,7 @@ const GetProductFromArr = (product_Id, user_id) => {
   const dispatch = useDispatch();
 
   const handleClick = (e) => {
+    setOpen(false);
     e.preventDefault();
     removefavorite(dispatch, user._id, { productId });
   };
@@ -217,10 +238,32 @@ const GetProductFromArr = (product_Id, user_id) => {
             </Link>
           </ButtonWrapper>
           <RemoveFromFavorites>
-            <Icon onClick={handleClick}>
+            <Icon onClick={handleClickOpen}>
               <RemoveCircleOutlineIcon />
             </Icon>
           </RemoveFromFavorites>
+          <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{"Alert"}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Do you want to remove the product from favorites
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button popup onClick={handleClick}>
+                Yes
+              </Button>
+              <Button popup onClick={handleClose}>
+                No
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Item>
       )}
     </>
@@ -241,7 +284,10 @@ const Favorites = () => {
         setFavorite(res.data);
       } catch {}
     };
-    getfavorites();
+    const intervalId = setInterval(() => {
+      getfavorites();
+    }, 500);
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
@@ -259,7 +305,7 @@ const Favorites = () => {
           favorites.products?.map((product) => (
             <GetProductFromArr productId={product} user_id={userId} />
           ))}
-        {!favorites && <Filler2 />}
+        {favorites && <Filler2 />}
       </Container>
       <Footer />
     </div>
